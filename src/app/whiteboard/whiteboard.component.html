@@ -1,0 +1,29 @@
+<div class="whiteboard-container">
+    <div>
+        <canvas #whiteboardCanvas width="700" height="400"></canvas>
+        <mat-card class="tools">
+            <mat-button-toggle-group [(ngModel)]="selectedTool" (ngModelChange)="selectTool($event)">
+                <mat-button-toggle value="select">Select</mat-button-toggle>
+                <mat-button-toggle value="brush">Brush</mat-button-toggle>
+                <mat-button-toggle value="rectangle">Rectangle</mat-button-toggle>
+                <mat-button-toggle value="circle">Circle</mat-button-toggle>
+            </mat-button-toggle-group>
+            <div *ngIf="selectedTool=='brush'">
+                <label for="brushSize" style="color:black;">Size</label>
+                <input type="range" id="brushSize" [(ngModel)]="brushSize" min="1" max="20"
+                    (input)="updateBrushSize()" />
+            </div>
+            <div *ngIf="selectedTool=='brush'">
+                <label for="colorPickerInput" style="color:black;">Color:</label> <input
+                    [style.background]=" selectedColor" id="Color:" [colorPicker]="selectedColor"
+                    (colorPickerChange)="updateBrushColor($event)" [value]="selectedColor" style="color: aliceblue;" />
+            </div>
+            <button mat-raised-button color="warn" (click)="clearCanvas()">Clear</button>
+        </mat-card>
+
+    </div>
+    <div class="tools__save">
+        <button mat-raised-button color="primary" (click)="saveAsJSON()">Save</button>
+        <button mat-raised-button color="primary" (click)="saveAsSVG()">Download</button>
+    </div>
+</div>

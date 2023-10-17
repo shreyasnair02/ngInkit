@@ -1,0 +1,36 @@
+canvas {
+  background-color: white;
+  outline: 2px dashed white;
+  border-radius: 1%;
+  outline-offset: 2px;
+  box-sizing: content-box;
+}
+.whiteboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1ch;
+}
+
+.tools {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  & > * {
+    margin: 2px 0px;
+  }
+}
+.tools__save {
+  display: flex;
+  gap: 2ch;
+}
+.color-picker {
+  display: flex;
+  align-items: center;
+}
+
+.color-picker-input {
+  margin-top: 16px;
+}

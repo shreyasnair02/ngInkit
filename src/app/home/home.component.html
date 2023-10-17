@@ -1,0 +1,26 @@
+<section>
+
+    <h1>Welcome to Whiteboard Management</h1>
+    <div class="example-button-row">
+        <button mat-button color="primary" style="background-color: skyblue;margin-bottom: 1rem;color:aliceblue;"
+            (click)="openWhiteboard('')"> New +</button>
+    </div>
+    <mat-card class=" landing-card">
+        <mat-table [dataSource]="whiteboards">
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                <mat-cell *matCellDef="let whiteboard">{{ whiteboard.name }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                <mat-cell *matCellDef="let whiteboard">
+                    <button mat-button (click)="openWhiteboard(whiteboard.id)">Open</button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['name', 'action']"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ['name', 'action']"></mat-row>
+        </mat-table>
+    </mat-card>
+</section>

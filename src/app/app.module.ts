@@ -1,16 +1,77 @@
-import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { WhiteboardComponent } from './whiteboard/whiteboard.component';
+
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+
+import { MatSliderModule } from '@angular/material/slider';
+import { HomeComponent } from './home/home.component';
+import { LocalStorageService } from './local-storage.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { sampleCanvasData as sampleData } from 'sample-data';
+
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'whiteboard/:id', component: WhiteboardComponent },
+];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, WhiteboardComponent, HomeComponent],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ColorPickerModule,
+    BrowserAnimationsModule,
+    MatButtonToggleModule,
+    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTableModule,
+    MatSnackBarModule,
+
+    RouterModule.forRoot(appRoutes),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    LocalStorageService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeLocalStorage,
+      deps: [LocalStorageService],
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
+export function initializeLocalStorage(
+  localStorageService: LocalStorageService
+) {
+  return () => {
+    // Check if sample canvas data is already in local storage
+    if (!localStorageService.get('sampleCanvasData')) {
+      // If not, insert sample canvas JSONs into local storage
+      const sampleCanvasData = [
+        // Add your sample canvas JSONs here
+        { id: 0, name: 'Sample 1', json: sampleData[0] },
+        { id: 1, name: 'Sample 2', json: sampleData[1] },
+        { id: 2, name: 'Sample 3', json: sampleData[2] },
+        { id: 3, name: 'Sample 4', json: sampleData[3] },
+
+        // Add more samples as needed
+      ];
+
+      localStorageService.save('sampleCanvasData', sampleCanvasData);
+    }
+  };
+}
