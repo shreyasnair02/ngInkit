@@ -18,6 +18,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { HomeComponent } from './home/home.component';
 import { LocalStorageService } from './local-storage.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 import { sampleCanvasData as sampleData } from 'sample-data';
 
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatTableModule,
     MatSnackBarModule,
+    MatIconModule,
 
     RouterModule.forRoot(appRoutes),
   ],

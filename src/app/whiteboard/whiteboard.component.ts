@@ -1,5 +1,5 @@
 import { LocalStorageService } from '../local-storage.service'; // Import your LocalStorageService or use your preferred method to access localStorage
-import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { ActivatedRoute, Router } from '@angular/router'; // Import ActivatedRoute
 import { Component, ElementRef, OnInit, Type, ViewChild } from '@angular/core';
 import { fabric } from 'fabric';
 import { sampleCanvasData } from 'sample-data';
@@ -25,7 +25,8 @@ export class WhiteboardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, // Inject ActivatedRoute
     private localStorageService: LocalStorageService, // Inject your LocalStorageService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {}
   ngOnInit() {
     this.canvasObject = new fabric.Canvas(this.canvas.nativeElement, {
@@ -165,5 +166,8 @@ export class WhiteboardComponent implements OnInit {
   }
   openSnackBar(message: string) {
     this._snackBar.open(message, '', { duration: 2000 });
+  }
+  goBack() {
+    this.router.navigate(['/']);
   }
 }

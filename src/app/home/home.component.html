@@ -2,8 +2,7 @@
 
     <h1>Welcome to Whiteboard Management</h1>
     <div class="example-button-row">
-        <button mat-button color="primary" style="background-color: skyblue;margin-bottom: 1rem;color:aliceblue;"
-            (click)="openWhiteboard('')"> New +</button>
+
     </div>
     <mat-card class=" landing-card">
         <mat-table [dataSource]="whiteboards">
@@ -15,7 +14,11 @@
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                 <mat-cell *matCellDef="let whiteboard">
-                    <button mat-button (click)="openWhiteboard(whiteboard.id)">Open</button>
+                    <button mat-raised-button (click)="openWhiteboard(whiteboard.id)" color="primary">
+
+                        <!-- <mat-icon color="accent">remove_red_eye</mat-icon> -->
+                        Open
+                    </button>
                 </mat-cell>
             </ng-container>
 
@@ -23,4 +26,11 @@
             <mat-row *matRowDef="let row; columns: ['name', 'action']"></mat-row>
         </mat-table>
     </mat-card>
+
+    <button mat-button color="primary"
+        style="background-color: #4758b8;margin: 1rem 0rem;color:white;width: 100%;font-size: 1.25rem; display: flex;justify-content: center; align-items: center; "
+        (click)="openWhiteboard('')">
+        <img src="../../assets/pencil-svgrepo-com.svg" alt="" style="height: 20px; width: 20px;">
+        DRAW
+    </button>
 </section>

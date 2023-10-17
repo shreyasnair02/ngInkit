@@ -1,9 +1,27 @@
 h1 {
-  background: skyblue;
+  font-size: 2rem;
 }
 .landing-card {
   border-radius: 2%;
   h1 {
     padding: 5px;
   }
+}
+mat-header-cell,
+mat-header-row {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+mat-row:nth-child(even) {
+  background: #e0e0e0;
+}
+
+mat-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
 }
