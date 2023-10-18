@@ -23,8 +23,8 @@ export class WhiteboardComponent implements OnInit {
     this.canvasObject.selection = true;
   }
   constructor(
-    private route: ActivatedRoute, // Inject ActivatedRoute
-    private localStorageService: LocalStorageService, // Inject your LocalStorageService,
+    private route: ActivatedRoute,
+    private localStorageService: LocalStorageService,
     private _snackBar: MatSnackBar,
     private router: Router
   ) {}
@@ -50,7 +50,6 @@ export class WhiteboardComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.whiteboardId = params['id'];
 
-      // Use your localStorage service or preferred method to get the JSON data
       const whiteboardData = this.localStorageService.get('sampleCanvasData');
       if (whiteboardData) {
         const canvasJSON = whiteboardData.find((canvas: any) => {
@@ -140,29 +139,24 @@ export class WhiteboardComponent implements OnInit {
     this.openSnackBar('🔥Saved Successfully');
   }
 
-  // Function to save the canvas as SVG
   saveAsSVG() {
     const svg = this.canvasObject.toSVG();
 
-    // Create a Blob from the SVG content
     const blob = new Blob([svg], { type: 'image/svg+xml' });
 
-    // Create a download link
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'canvas.svg'; // Set the desired file name
+    a.download = 'canvas.svg';
     a.style.display = 'none';
 
-    // Append the link to the DOM and trigger a click event to download
     document.body.appendChild(a);
     a.click();
 
-    // Remove the link from the DOM
     document.body.removeChild(a);
 
-    // Clean up the URL object
     URL.revokeObjectURL(url);
+    this.openSnackBar('🔥 Downloaded Successfully');
   }
   openSnackBar(message: string) {
     this._snackBar.open(message, '', { duration: 2000 });

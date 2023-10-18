@@ -19,7 +19,7 @@ export class HomeComponent {
   }
 
   getDataFromLocalStorage(): void {
-    const data = localStorage.getItem('sampleCanvasData'); // Replace 'your-key' with the actual key used for storage.
+    const data = localStorage.getItem('sampleCanvasData'); 
     if (data) {
       this.whiteboards = JSON.parse(data);
     }

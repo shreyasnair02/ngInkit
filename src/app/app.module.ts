@@ -60,17 +60,12 @@ export function initializeLocalStorage(
   localStorageService: LocalStorageService
 ) {
   return () => {
-    // Check if sample canvas data is already in local storage
     if (!localStorageService.get('sampleCanvasData')) {
-      // If not, insert sample canvas JSONs into local storage
       const sampleCanvasData = [
-        // Add your sample canvas JSONs here
         { id: 0, name: 'Sample 1', json: sampleData[0] },
         { id: 1, name: 'Sample 2', json: sampleData[1] },
         { id: 2, name: 'Sample 3', json: sampleData[2] },
         { id: 3, name: 'Sample 4', json: sampleData[3] },
-
-        // Add more samples as needed
       ];
 
       localStorageService.save('sampleCanvasData', sampleCanvasData);
