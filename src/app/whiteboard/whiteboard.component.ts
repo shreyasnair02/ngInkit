@@ -47,6 +47,7 @@ export class WhiteboardComponent implements OnInit {
         this.selectMode();
       }
     });
+
     this.route.params.subscribe((params) => {
       this.whiteboardId = params['id'];
 
@@ -74,6 +75,8 @@ export class WhiteboardComponent implements OnInit {
     this.selectedTool = tool;
     if (tool === 'brush') {
       this.selectBrush();
+    } else if (tool === 'select') {
+      this.selectMode();
     } else {
       this.canvasObject.selection = false;
       this.canvasObject.isDrawingMode = false;
